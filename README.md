@@ -9,14 +9,14 @@
 * Собрать исходник:
 
   ```bash
-  tweego -o NetlenijPsycho.html src/NetlenijPsycho.twee
+  tweego -o NetlenijPsycho.html src/game.twee
   ```
 
 ## Development
 
 * Запустить `tweego` в watch режиме:
   ```bash
-  tweego -w -o index.html src/NetlenijPsycho.twee
+  tweego -w -o index.html src/game.twee
   ```
 * (опционально) установить [vite](https://vite.dev/):
 
