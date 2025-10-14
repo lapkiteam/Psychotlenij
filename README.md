@@ -1,4 +1,4 @@
-# NetlenijPsycho
+# Psychotlenij (Психотленный)
 
 Текстовая игра про Нетленного, который отправился в психдиспансер, чтобы добыть себе немного...
 
@@ -9,7 +9,7 @@
 * Собрать исходник:
 
   ```bash
-  tweego -o NetlenijPsycho.html src/game.twee
+  tweego -o Psychotlenij.html src/game.twee
   ```
 
 ## Development
