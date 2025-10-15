@@ -45,3 +45,90 @@
 | Тревоги есть у всех  | Тленность      | 1    |
 
 «Симулянт» побеждает, потому что она приоритетнее, чем «Псих» и «Безумие заразительно».
+
+### Алгоритм
+
+* отсортировать по значению в порядке убывания
+* взять первые одинаковые числа
+* отсортировать по названию в порядке убывания
+* вернуть первое число
+
+```fsharp
+module List =
+  let getFirstDuplicates projection = function
+    | x::xs ->
+      let first = projection x
+      let rest =
+        xs
+        |> List.takeWhile (fun x -> first = projection x)
+      x::rest
+    | [] -> failwithf "List is empty!"
+
+type CharacteristicName =
+  | Adequacy = 4
+  | Inadequacy = 3
+  | Capitalism = 2
+  | Tlenost = 1
+
+module CharacteristicName =
+  let getOrder (name: CharacteristicName) = int name
+
+type Characteristic = { name: CharacteristicName; value: int }
+
+module Characteristic =
+  let makeAdequacy value = { name = CharacteristicName.Adequacy; value = value }
+  let makeInadequacy value = { name = CharacteristicName.Inadequacy; value = value }
+  let makeCapitalism value = { name = CharacteristicName.Capitalism; value = value }
+  let makeTlenost value = { name = CharacteristicName.Tlenost; value = value }
+
+let getTopCharacteristic characteristics =
+  characteristics
+  |> List.sortByDescending (fun x -> x.value)
+  |> List.getFirstDuplicates (fun x -> x.value)
+  |> List.sortByDescending (fun x -> CharacteristicName.getOrder x.name)
+  |> List.head
+
+#r "nuget: Expecto, 10.2.1"
+open Expecto
+
+[<Tests>]
+let getTopCharacteristicTest =
+  testList "getTopCharacteristicTest" [
+    testCase "1" <| fun () ->
+      Expect.equal
+        (getTopCharacteristic [
+          Characteristic.makeAdequacy 1
+          Characteristic.makeTlenost 4
+          Characteristic.makeCapitalism 3
+          Characteristic.makeInadequacy 2
+        ])
+        (Characteristic.makeTlenost 4)
+        ""
+    testCase "2" <| fun () ->
+      Expect.equal
+        (getTopCharacteristic [
+          Characteristic.makeAdequacy 0
+          Characteristic.makeInadequacy 2
+          Characteristic.makeCapitalism 2
+          Characteristic.makeTlenost 1
+        ])
+        (Characteristic.makeInadequacy 2)
+        ""
+    testCase "3" <| fun () ->
+      Expect.equal
+        (getTopCharacteristic [
+          Characteristic.makeAdequacy 2
+          Characteristic.makeInadequacy 2
+          Characteristic.makeCapitalism 1
+          Characteristic.makeTlenost 2
+        ])
+        (Characteristic.makeAdequacy 2)
+        ""
+  ]
+
+let tests = testList "all" [
+  getTopCharacteristicTest
+]
+
+runTestsWithCLIArgs [] [||] tests
+```
