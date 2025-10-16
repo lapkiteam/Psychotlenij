@@ -203,9 +203,10 @@ Psychotlenij
     Dialog.wiki("В ту минуту ты очень сильно пожалел, что абсолютно психически здоров.");
     Dialog.open();
   <</script>>
-<</link>> с помощью [[этой штуки->Пустить слюну]].
+<</link>> с помощью [[этой штуки->Пустить слюну на газету]].
 
-:: Пустить слюну
+
+:: Пустить слюну на газету
 Тебя всегда интересовало, как ведет себя собака Павлова, когда смотрит на свет. Теперь ты это узнал.
 <img src="data:image/webp;base64,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" alt="pepedrool.webp">
 На газете почему-то образовалось [[мокрое пятно->Выбросить газету]].
@@ -221,7 +222,7 @@ Psychotlenij
 
 :: Занять свободное место в маршрутке
 /* todo: дописать */
-* [[Побежать наперегонки]]
+* [[Побежать наперегонки за место]]
 * [[Купить место за пирожок]]
 * [[Просто уступить]]
 * [[Задуматься о бренности бытия]]
@@ -239,7 +240,7 @@ Psychotlenij
 [[Выйти на остановке]]
 
 
-:: Побежать наперегонки
+:: Побежать наперегонки за место
 /* todo: дописать */
 <<set $inadequacy to $inadequacy + 1>>
 [[Выйти на остановке]]
