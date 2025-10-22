@@ -1,0 +1,49 @@
+- name: |
+    feat: write "Задуматься о бренности бытия"
+  description: https://github.com/lapkiteam/Psychotlenij/blob/609efd4ea912e763059400944cff28d6991d7341/src/game.twee#L303-L306
+  branch_name: feat-write-zadumatsya-o-brennosti-bytiya
+- name: |
+    feat: write "Побежать наперегонки за место"
+  description: https://github.com/lapkiteam/Psychotlenij/blob/609efd4ea912e763059400944cff28d6991d7341/src/game.twee#L309-L312
+  branch_name: feat-write-pobezhat-naperegonki-za-mesto
+- name: |
+    feat: write "Просто уступить"
+  description: https://github.com/lapkiteam/Psychotlenij/blob/609efd4ea912e763059400944cff28d6991d7341/src/game.twee#L315-L318
+  branch_name: feat-write-prosto-ustupit
+- name: |
+    feat: write "Выяснить цену вопроса"
+  description: https://github.com/lapkiteam/Psychotlenij/blob/609efd4ea912e763059400944cff28d6991d7341/src/game.twee#L340-L344
+  branch_name: feat-write-viasnit-cenu-voprosa
+- name: |
+    feat: write "Пустить слюну"
+  description: https://github.com/lapkiteam/Psychotlenij/blob/609efd4ea912e763059400944cff28d6991d7341/src/game.twee#L351-L354
+  branch_name: feat-write-pustit-slunu
+- name: |
+    feat: write "Записаться к врачу"
+  description: https://github.com/lapkiteam/Psychotlenij/blob/609efd4ea912e763059400944cff28d6991d7341/src/game.twee#L357-L360
+  branch_name: feat-write-zapisatsya-k-vrachu
+- name: |
+    feat: write "Выслушать бабулю"
+  description: https://github.com/lapkiteam/Psychotlenij/blob/609efd4ea912e763059400944cff28d6991d7341/src/game.twee#L372-L375
+  branch_name: feat-write-vislushat-babulu
+- name: |
+    feat: write "Заявить, что ты — перформанс артист"
+  description: https://github.com/lapkiteam/Psychotlenij/blob/609efd4ea912e763059400944cff28d6991d7341/src/game.twee#L378-L381
+  branch_name: feat-write-zayavit-chto-ty-performans-artist
+- name: |
+    feat: write "Пересесть"
+  description: https://github.com/lapkiteam/Psychotlenij/blob/609efd4ea912e763059400944cff28d6991d7341/src/game.twee#L384-L387
+  branch_name: feat-write-peresest
+- name: |
+    feat: write "Побежать наперегонки"
+  description: https://github.com/lapkiteam/Psychotlenij/blob/609efd4ea912e763059400944cff28d6991d7341/src/game.twee#L405-L409
+  branch_name: feat-write-pobezhat-naperegonki
+- name: |
+    feat: write "Показать свои шрамы"
+  description: https://github.com/lapkiteam/Psychotlenij/blob/609efd4ea912e763059400944cff28d6991d7341/src/game.twee#L412-L417
+  branch_name: feat-write-pokazat-svoi-shramy
+- name: |
+    feat: write "Переложить проблему на плечи общества"
+  description: https://github.com/lapkiteam/Psychotlenij/blob/609efd4ea912e763059400944cff28d6991d7341/src/game.twee#L418-L421
+  branch_name: feat-write-perelozhit-problemu-na-plechi-obshhestva
+
