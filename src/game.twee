@@ -120,33 +120,39 @@ Psychotlenij
 <<set $tlenost to 0>>
 
 <<script>>
-  setup.achievements = {
+  setup.achievementDescriptions = {
     "Симулянт (концовка)": {
       name: "Симулянт (концовка)",
       desc: "А нечего было претворяться нормальным!",
-      earned: false
     },
     "Псих (концовка)": {
       name: "Псих (концовка)",
       desc: "Да у тебя, поди, совсем крышнячок протёк.",
-      earned: false
     },
     "Безумие заразительно (концовка)": {
       name: "Безумие заразительно (концовка)",
       desc: "Уйди со своим капитализмом!",
-      earned: false
     },
     "Тревоги есть у всех (концовка)": {
       name: "Тревоги есть у всех (концовка)",
       desc: "Все мы — творожные массы, чего уж скрывать.",
-      earned: false
     },
   };
 
+  setup.achievements = recall("achievements", {
+    "Симулянт (концовка)": false,
+    "Псих (концовка)": false,
+    "Безумие заразительно (концовка)": false,
+    "Тревоги есть у всех (концовка)": false,
+  })
+
   setup.unlock = function(id) {
-    const ach = setup.achievements[id];
-    if (!ach || ach.earned) return;
-    ach.earned = true;
+    const isAchievementEarned = setup.achievements[id]
+    console.log(isAchievementEarned)
+    if (isAchievementEarned) return
+    setup.achievements[id] = true
+    memorize("achievements", setup.achievements)
+    const ach = setup.achievementDescriptions[id]
     UI.alert(`
       <div class="achievement">
         <strong>${ach.name}</strong><br>${ach.desc}
@@ -174,8 +180,9 @@ Psychotlenij
 
 <<nobr>>
   <ul>
-    <<for _id, _ach range setup.achievements>>
-      <<if _ach.earned>>
+    <<for _id, _achEarned range setup.achievements>>
+      <<set _ach to setup.achievementDescriptions[_id]>>
+      <<if _achEarned>>
         <li>✅ ''_ach.name'' – _ach.desc</li>
       <<else>>
         <li>⬜️ _ach.name</li>
