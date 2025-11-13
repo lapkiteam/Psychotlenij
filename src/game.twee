@@ -119,6 +119,24 @@ Psychotlenij
 <<set $capitalism to 0>>
 <<set $tlenost to 0>>
 
+<<script>>
+  setup.achievements = {
+    "first-step": { name: "Первый шаг", desc: "Пройти вводный квест", earned: false },
+    "secret-found": { name: "Тайный находка", desc: "Найти скрытый предмет", earned: false },
+  };
+
+  setup.unlock = function(id) {
+    const ach = setup.achievements[id];
+    if (!ach || ach.earned) return;
+    ach.earned = true;
+    UI.alert(`
+      <div class="achievement">
+        <strong>${ach.name}</strong><br>${ach.desc}
+      </div>
+    `, { duration: 3000 });
+  };
+<</script>>
+
 
 :: StoryMenu
 [[Достижения]]
@@ -135,6 +153,18 @@ Psychotlenij
 
 :: Достижения
 ! Достижения
+
+<<nobr>>
+  <ul>
+    <<for _id, _ach range setup.achievements>>
+      <<if _ach.earned>>
+        <li>✅ ''_ach.name'' – _ach.desc</li>
+      <<else>>
+        <li>⬜️ _ach.name</li>
+      <</if>>
+    <</for>>
+  </ul>
+<</nobr>>\
 
 * <<back "Назад">>
 
