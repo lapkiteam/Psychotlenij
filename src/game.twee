@@ -202,6 +202,13 @@ Psychotlenij
   </ul>
 <</nobr>>\
 
+* <<link "Сбросить достижения">>
+  <<script>>
+    Dialog.setup("Предупреждение!");
+    Dialog.wiki("Ты точно хочешь сбросить все достижения?");
+    Dialog.open();
+  <</script>>
+<</link>>
 * <<back "Назад">>
 
 
