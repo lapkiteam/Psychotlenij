@@ -120,6 +120,13 @@ Psychotlenij
 <<set $tlenost to 0>>
 
 <<script>>
+  const defaultAchievements = () => ({
+    "Симулянт (концовка)": false,
+    "Псих (концовка)": false,
+    "Безумие заразительно (концовка)": false,
+    "Тревоги есть у всех (концовка)": false,
+  })
+
   setup.achievementDescriptions = {
     "Симулянт (концовка)": {
       name: "Симулянт (концовка)",
@@ -139,12 +146,7 @@ Psychotlenij
     },
   };
 
-  setup.achievements = recall("achievements", {
-    "Симулянт (концовка)": false,
-    "Псих (концовка)": false,
-    "Безумие заразительно (концовка)": false,
-    "Тревоги есть у всех (концовка)": false,
-  })
+  setup.achievements = recall("achievements", defaultAchievements())
 
   setup.unlock = function(id) {
     const isAchievementEarned = setup.achievements[id]
@@ -159,6 +161,12 @@ Psychotlenij
       </div>
     `, { duration: 3000 });
   };
+
+  setup.resetAchievements = function() {
+    setup.achievements = defaultAchievements()
+    forget("achievements")
+    console.log("reset!")
+  }
 <</script>>
 
 
@@ -203,11 +211,13 @@ Psychotlenij
 <</nobr>>\
 
 * <<link "Сбросить достижения">>
-  <<script>>
-    Dialog.setup("Предупреждение!");
-    Dialog.wiki("Ты точно хочешь сбросить все достижения?");
-    Dialog.open();
-  <</script>>
+  <<run Modal(
+    "Ты точно хочешь сбросить все достижения?",
+    () => {
+      setup.resetAchievements()
+      Engine.show() // update current passage
+    }
+  )>>
 <</link>>
 * <<back "Назад">>
 
