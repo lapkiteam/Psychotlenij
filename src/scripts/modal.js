@@ -57,4 +57,6 @@ function Modal(message, onYes, onNo) {
 
   const body = document.querySelector("body")
   body?.appendChild(modal)
+
+  btnNo.focus()
 }
