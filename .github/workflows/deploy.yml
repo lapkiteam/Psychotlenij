@@ -80,37 +80,49 @@ jobs:
         run: |
           FILE="dist/index.html"
 
-          META_TAGS=(
-            '<!-- HTML Meta Tags -->'
-            '<title>Psychotlenij</title>'
-            '<meta name="description" content="Текстовая игра про Нетленного, который отправился в психдиспансер, чтобы добыть себе немного...">'
-            ''
-            '<!-- Facebook Meta Tags -->'
-            '<meta property="og:url" content="https://lapkiteam.github.io/Psychotlenij">'
-            '<meta property="og:type" content="website">'
-            '<meta property="og:title" content="Психотленный">'
-            '<meta property="og:description" content="Текстовая игра про Нетленного, который отправился в психдиспансер, чтобы добыть себе немного...">'
-            '<meta property="og:image" content="">'
-            ''
-            '<!-- Twitter Meta Tags -->'
-            '<meta name="twitter:card" content="summary_large_image">'
-            '<meta property="twitter:domain" content="lapkiteam.github.io">'
-            '<meta property="twitter:url" content="https://lapkiteam.github.io/Psychotlenij">'
-            '<meta name="twitter:title" content="Психотленный">'
-            '<meta name="twitter:description" content="Текстовая игра про Нетленного, который отправился в психдиспансер, чтобы добыть себе немного...">'
-            '<meta name="twitter:image" content="">'
-          )
-
           if [[ ! -f "$FILE" ]]; then
-            echo "File $FILE not found!"
+            echo "File $FILE not found."
             exit 1
           fi
 
-          for TAG in "${META_TAGS[@]}"; do
-            sed -i.bak "/<head>/a \ \ $TAG" "$FILE"
-          done
+          echo Add metadata in 'META'
+          META=$(cat << EOF
+          <!-- HTML Meta Tags -->
+          <title>Психотленный</title>
+          <meta name="description" content="Текстовая игра про Нетленного, который отправился в психдиспансер, чтобы добыть себе немного...">
 
-          echo "Metadata add in $FILE!"
+          <!-- Facebook Meta Tags -->
+          <meta property="og:url" content="https://lapkiteam.github.io/Psychotlenij">
+          <meta property="og:type" content="website">
+          <meta property="og:title" content="Психотленный">
+          <meta property="og:description" content="Текстовая игра про Нетленного, который отправился в психдиспансер, чтобы добыть себе немного...">
+          <meta property="og:image" content="">
+
+          <!-- Twitter Meta Tags -->
+          <meta name="twitter:card" content="summary_large_image">
+          <meta property="twitter:domain" content="lapkiteam.github.io">
+          <meta property="twitter:url" content="https://lapkiteam.github.io/Psychotlenij">
+          <meta name="twitter:title" content="Психотленный">
+          <meta name="twitter:description" content="Текстовая игра про Нетленного, который отправился в психдиспансер, чтобы добыть себе немного...">
+          <meta name="twitter:image" content="">
+          EOF
+          )
+
+          echo Ищу '</head>'...
+          HEAD_CLOSE=$(grep -n -i "</head>" "$FILE" | head -n1 | cut -d: -f1)
+
+          if [[ -z "$HEAD_CLOSE" ]]; then
+            echo "Тег </head> не найден в $FILE."
+            exit 1
+          fi
+
+          echo Добавить index.html
+          awk -v meta="$META" -v line="$HEAD_CLOSE" '
+            NR == line { print meta }
+            { print }
+          ' "$FILE" > "${FILE}.tmp" && mv "${FILE}.tmp" "$FILE"
+
+          echo "Metadata added in $FILE."
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
