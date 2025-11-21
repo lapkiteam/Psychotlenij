@@ -76,6 +76,42 @@ jobs:
           mkdir -p dist
           tweego -m src/scripts -o dist/index.html src/game.twee
 
+      - name: Add Social Card
+        run: |
+          FILE="dist/index.html"
+
+          META_TAGS=(
+            '<!-- HTML Meta Tags -->'
+            '<title>Psychotlenij</title>'
+            '<meta name="description" content="Текстовая игра про Нетленного, который отправился в психдиспансер, чтобы добыть себе немного...">'
+            ''
+            '<!-- Facebook Meta Tags -->'
+            '<meta property="og:url" content="https://lapkiteam.github.io/Psychotlenij">'
+            '<meta property="og:type" content="website">'
+            '<meta property="og:title" content="Психотленный">'
+            '<meta property="og:description" content="Текстовая игра про Нетленного, который отправился в психдиспансер, чтобы добыть себе немного...">'
+            '<meta property="og:image" content="">'
+            ''
+            '<!-- Twitter Meta Tags -->'
+            '<meta name="twitter:card" content="summary_large_image">'
+            '<meta property="twitter:domain" content="lapkiteam.github.io">'
+            '<meta property="twitter:url" content="https://lapkiteam.github.io/Psychotlenij">'
+            '<meta name="twitter:title" content="Психотленный">'
+            '<meta name="twitter:description" content="Текстовая игра про Нетленного, который отправился в психдиспансер, чтобы добыть себе немного...">'
+            '<meta name="twitter:image" content="">'
+          )
+
+          if [[ ! -f "$FILE" ]]; then
+            echo "File $FILE not found!"
+            exit 1
+          fi
+
+          for TAG in "${META_TAGS[@]}"; do
+            sed -i.bak "/<head>/a \ \ $TAG" "$FILE"
+          done
+
+          echo "Metadata add in $FILE!"
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
