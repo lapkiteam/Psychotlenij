@@ -90,7 +90,7 @@ jobs:
           <meta property="og:type" content="website">
           <meta property="og:title" content="Психотленный">
           <meta property="og:description" content="Текстовая игра про Нетленного, который отправился в психдиспансер, чтобы добыть себе немного...">
-          <meta property="og:image" content="">
+          <meta property="og:image" content="https://lapkiteam.github.io/Psychotlenij/logo.webp">
 
           <!-- Twitter Meta Tags -->
           <meta name="twitter:card" content="summary_large_image">
@@ -98,7 +98,7 @@ jobs:
           <meta property="twitter:url" content="https://lapkiteam.github.io/Psychotlenij">
           <meta name="twitter:title" content="Психотленный">
           <meta name="twitter:description" content="Текстовая игра про Нетленного, который отправился в психдиспансер, чтобы добыть себе немного...">
-          <meta name="twitter:image" content="">
+          <meta name="twitter:image" content="https://lapkiteam.github.io/Psychotlenij/logo.webp">
           EOF
           )
 
@@ -133,6 +133,9 @@ jobs:
           ' "$HTML_FILE" > "${HTML_FILE}.tmp" && mv "${HTML_FILE}.tmp" "$HTML_FILE"
 
           echo "Metadata added in $HTML_FILE."
+
+      - name: Copy public
+        run: cp public/* dist
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
