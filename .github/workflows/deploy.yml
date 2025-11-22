@@ -78,14 +78,8 @@ jobs:
 
       - name: Add Social Card
         run: |
-          FILE="dist/index.html"
+          set -euo pipefail
 
-          if [[ ! -f "$FILE" ]]; then
-            echo "File $FILE not found."
-            exit 1
-          fi
-
-          echo Add metadata in 'META'
           META=$(cat << EOF
           <!-- HTML Meta Tags -->
           <title>Психотленный</title>
@@ -108,21 +102,37 @@ jobs:
           EOF
           )
 
-          echo Ищу '</head>'...
-          HEAD_CLOSE=$(grep -n -i "</head>" "$FILE" | head -n1 | cut -d: -f1)
+          # if [[ $# -eq 0 ]]; then
+          #   echo "Path to HTML is not specified."
+          #   exit 1
+          # fi
 
-          if [[ -z "$HEAD_CLOSE" ]]; then
-            echo "Тег </head> не найден в $FILE."
+          # HTML_FILE="$1"
+          HTML_FILE="dist/index.html"
+
+          if [[ ! -f "$HTML_FILE" ]]; then
+            echo "File $HTML_FILE not found."
             exit 1
           fi
 
-          echo Добавить index.html
-          awk -v meta="$META" -v line="$HEAD_CLOSE" '
+          NODE='<meta charset="UTF-8" />'
+          echo "Finding '$NODE'"...
+
+          NODE_POSITION=$(grep -m 1 -n -i "$NODE" "$HTML_FILE" | cut -d: -f1)
+          if [[ -z "$NODE_POSITION" ]]; then
+            echo "Tag "$NODE" not founded in $HTML_FILE."
+            exit 1
+          fi
+          NODE_POSITION=$(($NODE_POSITION + 1))
+
+          echo Adding metadata to HTML file...
+
+          awk -v meta="$META" -v line="$NODE_POSITION" '
             NR == line { print meta }
             { print }
-          ' "$FILE" > "${FILE}.tmp" && mv "${FILE}.tmp" "$FILE"
+          ' "$HTML_FILE" > "${HTML_FILE}.tmp" && mv "${HTML_FILE}.tmp" "$HTML_FILE"
 
-          echo "Metadata added in $FILE."
+          echo "Metadata added in $HTML_FILE."
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
