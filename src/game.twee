@@ -197,20 +197,15 @@ Macro.add("link-message", {
     function escape(raw) {
       return raw
         .trim()
-        .replace("\"", "\\\"")
-        // .replace("\r\n", "\\r\\n")
-        // .replace("\n", "\\n")
-        // .replace("\r", "\\r")
-        .replace("\t", "") // todo
-        .replace("\r\n", "") // todo
-        .replace("\n", "") // todo
-        .replace("\r", "") // todo
+        .replace(/"/g, "\\\"")
+        .replace(/\n/g, "\\n")
     }
     try {
       for (let i = 0, len = this.payload.length; i < len; ++i) {
         const ctx = this.payload[0] // https://www.motoslave.net/sugarcube/2/docs/#macrocontext-api
 
         const [link, messageTitle] = ctx.args
+        console.log(JSON.stringify(ctx.contents, undefined, 2))
         jQuery(this.output).wiki(`<<link "${escape(link)}">>
           <<script>>
             Dialog.setup("${escape(messageTitle)}");
@@ -279,10 +274,7 @@ Macro.add("link-message", {
 
 :: Купить VR
 Конечно, ты можешь его купить со своими <<link-message "десятью работами" "10 работ">>
-  Да, ты действительно работаешь на десяти работах. Как тебе это удается? Ну, очень просто: у обычного человека максимум 250IQ, а у тебя их — целых 3000IQ! Поэтому ты с легкостью умеешь обманывать других.
-
-  Интервью окончено.
-
+  Да, ты действительно работаешь на десяти работах. Как тебе это удается? Ну, очень просто: у обычного человека максимум 250IQ, а у тебя их — целых 3000IQ! Поэтому ты с легкостью умеешь обманывать других. Интервью окончено.
 <</link-message>> и легким <<link "фармом денег">>
   <<script>>
     Dialog.setup("Фарм денег");
