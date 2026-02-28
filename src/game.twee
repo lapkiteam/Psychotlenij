@@ -189,7 +189,7 @@ v1.0
 [[Достижения]]
 
 
-:: Message [script]
+:: link-message [script]
 Macro.add("link-message", {
   skipArgs : false,
   tags     : [],
@@ -207,8 +207,9 @@ Macro.add("link-message", {
         .join('')
     }
     try {
-      for (let i = 0, len = this.payload.length; i < len; ++i) {
-        const ctx = this.payload[0] // https://www.motoslave.net/sugarcube/2/docs/#macrocontext-api
+      const payloadsLength = this.payload.length
+      for (let payloadsIndex = 0; payloadsIndex < payloadsLength; ++payloadsIndex) {
+        const ctx = this.payload[payloadsIndex] // https://www.motoslave.net/sugarcube/2/docs/#macrocontext-api
         const [link, messageTitle] = ctx.args
         jQuery(this.output).wiki(`<<link "${escape(link)}">>
           <<script>>
@@ -224,6 +225,7 @@ Macro.add("link-message", {
     }
   }
 });
+
 
 
 :: Начало
