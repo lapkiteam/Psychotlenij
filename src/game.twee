@@ -195,10 +195,16 @@ Macro.add("link-message", {
   tags     : [],
   handler  : function () {
     function escape(raw) {
-      return raw
-        .trim()
-        .replace(/"/g, "\\\"")
-        .replace(/\n/g, "\\n")
+      return Array.from(
+        raw.trim()
+      )
+        .map(ch => {
+          if (ch === '"') return '\\"'
+          if (ch === '\n') return '\\n'
+          if (ch === '\\') return '\\\\'
+          return ch
+        })
+        .join('')
     }
     try {
       for (let i = 0, len = this.payload.length; i < len; ++i) {
