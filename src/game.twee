@@ -209,9 +209,7 @@ Macro.add("link-message", {
     try {
       for (let i = 0, len = this.payload.length; i < len; ++i) {
         const ctx = this.payload[0] // https://www.motoslave.net/sugarcube/2/docs/#macrocontext-api
-
         const [link, messageTitle] = ctx.args
-        console.log(JSON.stringify(ctx.contents, undefined, 2))
         jQuery(this.output).wiki(`<<link "${escape(link)}">>
           <<script>>
             Dialog.setup("${escape(messageTitle)}");
