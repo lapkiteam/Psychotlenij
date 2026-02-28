@@ -27,3 +27,9 @@
 ## Системные требования
 
 Любая ОСь, на которой идет веб-браузер.
+
+## Скриншоты
+
+* ![psychotlenij-screenshot-1](./screenshots/psychotlenij-screenshot-1.png)
+* ![psychotlenij-screenshot-2](./screenshots/psychotlenij-screenshot-2.png)
+* ![psychotlenij-screenshot-3](./screenshots/psychotlenij-screenshot-3.png)
